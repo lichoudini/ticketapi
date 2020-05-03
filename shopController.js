@@ -54,25 +54,109 @@ exports.view = function (req, res) {
         });
     });
 };
+
+*/
+
 // Handle update profile info
 exports.update = function (req, res) {
-Profile.findById(req.params.profile_id, function (err, profile) {
-        if (err)
-            res.send(err);
-        profile.profileid = req.body.profileid ? req.body.profileid : profile.profileid;
-        profile.profilename = req.body.profilename;
-// save the profile and check for errors
-        profile.save(function (err) {
-            if (err)
-                res.json(err);
-            res.json({
-                message: 'Profile Info updated',
-                data: profile
-            });
-        });
-    });
-};
-*/
+
+    //Agents ChangeName
+    if (req.params.action == 'changeName'){
+        Shop.updateOne(
+           {_id: req.params.shop_id },
+           {shop_name:req.body.shop_name},
+            function(err,result){
+                if (err){
+                res.send(err);        
+                } else {
+                res.send(result);
+                }
+            }
+        )
+    }
+    //Agents Update
+    if (req.params.action == 'addAgent'){
+        Shop.updateOne(
+           {_id: req.params.shop_id },
+           { $addToSet: {shop_agents: [req.body.shop_agent]}},
+            function(err,result){
+                if (err){
+                res.send(err);        
+                } else {
+                res.send(result);
+                }
+            }
+        )
+    }
+    if (req.params.action == 'removeAgent'){
+        Shop.updateOne(
+           {_id: req.params.shop_id },
+           { $pullAll: {shop_agents: [req.body.shop_agent]}},
+            function(err,result){
+                if (err){
+                res.send(err);        
+                } else {
+                res.send(result);
+                }
+            }
+        )
+    }
+    //Clients Update
+    if (req.params.action == 'addClient'){
+        Shop.updateOne(
+           {_id: req.params.shop_id },
+           { $addToSet: {shop_clients: [req.body.shop_client]}},
+            function(err,result){
+                if (err){
+                res.send(err);        
+                } else {
+                res.send(result);
+                }
+            }
+        )
+    }
+    if (req.params.action == 'removeClient'){
+        Shop.updateOne(
+           {_id: req.params.shop_id },
+           { $pullAll: {shop_clients: [req.body.shop_client]}},
+            function(err,result){
+                if (err){
+                res.send(err);        
+                } else {
+                res.send(result);
+                }
+            }
+        )
+    }
+    //Tickets Update
+    if (req.params.action == 'addTicket'){
+        Shop.updateOne(
+           {_id: req.params.shop_id },
+           { $addToSet: {shop_tickets: [req.body.shop_ticket]}},
+            function(err,result){
+                if (err){
+                res.send(err);        
+                } else {
+                res.send(result);
+                }
+            }
+        )
+    }
+    if (req.params.action == 'removeTicket'){
+        Shop.updateOne(
+           {_id: req.params.shop_id },
+           { $pullAll: {shop_tickets: [req.body.shop_ticket]}},
+            function(err,result){
+                if (err){
+                res.send(err);        
+                } else {
+                res.send(result);
+                }
+            }
+        )
+    }
+}
+
 
 
 exports.delete = function (req, res) {

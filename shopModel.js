@@ -8,13 +8,16 @@ var shopSchema = mongoose.Schema({
         unique: true
     },
     shop_agents: {
-        type: String
+        type: Array,
+        default:[]
     },
     shop_clients: {
-        type: String
+        type: Array,
+        default:[]
     },
     shop_tickets: {
-        type: String
+        type: Array,
+        default:[]
     }
 });
 // Export Contact model

@@ -22,16 +22,17 @@ router.route('/shops')
     .post(shopController.new);
 router.route('/shops/:shop_id')
     //.get(userController.view)
-    //.patch(userController.update)
-    //.put(userController.update)
     .delete(shopController.delete)
-//router.route('/validate')
-    //.post(shopController.validate)
+router.route('/shops/:shop_id/:action')
+    .patch(shopController.update)
+    .put(shopController.update)
+
+    //.delete(profileController.delete)
 
 /*
 // Profile routes
 router.route('/profiles')
-    .get(profileController.index)
+    .get(profileController.index)S
     .post(profileController.new);
 router.route('/profiles/:profile_id')
     .get(profileController.view)
