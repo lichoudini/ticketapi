@@ -14,20 +14,30 @@ router.get('/', function (req, res) {
 //var profileController = require('./profileController');
 //var platformController = require('./platformController');
 var shopController = require('./shopController');
+var agentController = require('./agentController');
 
 
-// User routes
+// Shop routes
 router.route('/shops')
     .get(shopController.index)
     .post(shopController.new);
 router.route('/shops/:shop_id')
-    //.get(userController.view)
     .delete(shopController.delete)
 router.route('/shops/:shop_id/:action')
     .patch(shopController.update)
     .put(shopController.update)
 
-    //.delete(profileController.delete)
+// Agent Routes
+router.route('/agents')
+    .get(agentController.index)
+    .post(agentController.new);
+router.route('/agents/:agent_id')
+    .delete(shopController.delete)
+//router.route('/agents/:agent_id/:action')
+    //.patch(agentController.update)
+    //.put(agentController.update)
+
+
 
 /*
 // Profile routes
