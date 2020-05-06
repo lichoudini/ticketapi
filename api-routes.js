@@ -22,6 +22,7 @@ router.route('/shops')
     .get(shopController.index)
     .post(shopController.new);
 router.route('/shops/:shop_id')
+    .get(shopController.view)
     .delete(shopController.delete)
 router.route('/shops/:shop_id/:action')
     .patch(shopController.update)
@@ -32,10 +33,11 @@ router.route('/agents')
     .get(agentController.index)
     .post(agentController.new);
 router.route('/agents/:agent_id')
-    .delete(shopController.delete)
-//router.route('/agents/:agent_id/:action')
-    //.patch(agentController.update)
-    //.put(agentController.update)
+    .get(agentController.view)
+    .delete(agentController.delete)
+router.route('/agents/:agent_id/:action')
+    .patch(agentController.update)
+    .put(agentController.update)
 
 
 

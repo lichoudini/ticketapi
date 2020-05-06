@@ -27,7 +27,6 @@ exports.new = function (req, res) {
         agent.agent_role = req.body.agent_role;
         agent.agent_name = req.body.agent_name;
         agent.agent_password = req.body.agent_password;
-        agent.agent_tickets = req.body.agent_tickets;
         agent.save(function (err) {
                 res.json({
                     message: 'New agent created!',
@@ -36,14 +35,24 @@ exports.new = function (req, res) {
             });
         };
 
+// Handle view agent info
+exports.view = function (req, res) {
+    Agent.findById(req.params.agent_id, function (err, agent) {
+        if (err)
+            res.send(err);
+        res.json({
+            message: 'Agent details loading..',
+            data: agent
+        });
+    });
+};
 
-/*
-// Handle update profile info
+// Handle update agent info
 exports.update = function (req, res) {
 
-    //Agents ChangeName
-    if (req.params.action == 'changeName'){
-        agent.updateOne(
+    //Agent ChangeRole
+    if (req.params.action == 'changeRole'){
+        Agent.updateOne(
            {_id: req.params.agent_id },
            {agent_name:req.body.agent_name},
             function(err,result){
@@ -55,11 +64,12 @@ exports.update = function (req, res) {
             }
         )
     }
-    //Agents Update
-    if (req.params.action == 'addAgent'){
-        agent.updateOne(
+
+    //Agent ChangeName
+    if (req.params.action == 'changeName'){
+        Agent.updateOne(
            {_id: req.params.agent_id },
-           { $addToSet: {agent_agents: [req.body.agent_agent]}},
+           {agent_name:req.body.agent_name},
             function(err,result){
                 if (err){
                 res.send(err);        
@@ -69,10 +79,12 @@ exports.update = function (req, res) {
             }
         )
     }
-    if (req.params.action == 'removeAgent'){
-        agent.updateOne(
+
+    //Agent ChangePassword
+    if (req.params.action == 'changePassword'){
+        Agent.updateOne(
            {_id: req.params.agent_id },
-           { $pullAll: {agent_agents: [req.body.agent_agent]}},
+           {agent_password:req.body.agent_password},
             function(err,result){
                 if (err){
                 res.send(err);        
@@ -82,63 +94,9 @@ exports.update = function (req, res) {
             }
         )
     }
-    //Clients Update
-    if (req.params.action == 'addClient'){
-        agent.updateOne(
-           {_id: req.params.agent_id },
-           { $addToSet: {agent_clients: [req.body.agent_client]}},
-            function(err,result){
-                if (err){
-                res.send(err);        
-                } else {
-                res.send(result);
-                }
-            }
-        )
-    }
-    if (req.params.action == 'removeClient'){
-        agent.updateOne(
-           {_id: req.params.agent_id },
-           { $pullAll: {agent_clients: [req.body.agent_client]}},
-            function(err,result){
-                if (err){
-                res.send(err);        
-                } else {
-                res.send(result);
-                }
-            }
-        )
-    }
-    //Tickets Update
-    if (req.params.action == 'addTicket'){
-        agent.updateOne(
-           {_id: req.params.agent_id },
-           { $addToSet: {agent_tickets: [req.body.agent_ticket]}},
-            function(err,result){
-                if (err){
-                res.send(err);        
-                } else {
-                res.send(result);
-                }
-            }
-        )
-    }
-    if (req.params.action == 'removeTicket'){
-        agent.updateOne(
-           {_id: req.params.agent_id },
-           { $pullAll: {agent_tickets: [req.body.agent_ticket]}},
-            function(err,result){
-                if (err){
-                res.send(err);        
-                } else {
-                res.send(result);
-                }
-            }
-        )
-    }
+    
 }
 
-*/
 
 exports.delete = function (req, res) {
     Agent.remove({

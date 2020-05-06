@@ -18,10 +18,6 @@ var agentSchema = mongoose.Schema({
     agent_password: {
         type: String,
         required: true
-    },
-    agent_tickets: {
-        type: Array,
-        default:[]
     }
 });
 // Export Agent model

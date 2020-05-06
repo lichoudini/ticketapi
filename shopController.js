@@ -42,20 +42,20 @@ exports.new = function (req, res) {
         })
 };
 
-/*
-// Handle view profile info
+
+// Handle view shop info
 exports.view = function (req, res) {
-    Profile.findById(req.params.profile_id, function (err, profile) {
+    Shop.findById(req.params.shop_id, function (err, shop) {
         if (err)
             res.send(err);
         res.json({
-            message: 'Profile details loading..',
-            data: profile
+            message: 'Shop details loading..',
+            data: shop
         });
     });
 };
 
-*/
+
 
 // Handle update profile info
 exports.update = function (req, res) {
