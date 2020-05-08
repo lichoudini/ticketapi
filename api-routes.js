@@ -15,6 +15,8 @@ router.get('/', function (req, res) {
 //var platformController = require('./platformController');
 var shopController = require('./shopController');
 var agentController = require('./agentController');
+var clientController = require('./clientController');
+var ticketController = require('./ticketController');
 
 
 // Shop routes
@@ -38,6 +40,28 @@ router.route('/agents/:agent_id')
 router.route('/agents/:agent_id/:action')
     .patch(agentController.update)
     .put(agentController.update)
+
+// Client Routes
+router.route('/clients')
+    .get(clientController.index)
+    .post(clientController.new);
+router.route('/clients/:client_id')
+    .get(clientController.view)
+    .delete(clientController.delete)
+router.route('/clients/:client_id/:action')
+    .patch(clientController.update)
+    .put(clientController.update)
+
+// Ticket Routes
+router.route('/tickets')
+    .get(ticketController.index)
+    .post(ticketController.new);
+router.route('/tickets/:ticket_id')
+    .get(ticketController.view)
+    .delete(ticketController.delete)
+router.route('/tickets/:ticket_id/:action')
+    .patch(ticketController.update)
+    .put(ticketController.update)
 
 
 
