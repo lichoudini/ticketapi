@@ -22,16 +22,16 @@ exports.index = function (req, res) {
 // Handle create profile actions
 exports.new = function (req, res) {
     let shop = new Shop();
-    Shop.find({shop : req.body.shop_name}).exec(function(err, docs){
+    Shop.find({shop : req.body.name}).exec(function(err, docs){
         if(docs.length){
             res.json({
                 message: 'Shop already exists'
             });
             } else{
-            shop.shop_name = req.body.shop_name;
-            shop.shop_agents = req.body.shop_agents;
-            shop.shop_clients = req.body.shop_clients;
-            shop.shop_tickets = req.body.shop_tickets;
+            shop.name = req.body.name;
+            shop.agents = req.body.agents;
+            shop.clients = req.body.clients;
+            shop.tickets = req.body.tickets;
             shop.save(function (err) {
                     res.json({
                         message: 'New shop created!',
@@ -64,7 +64,7 @@ exports.update = function (req, res) {
     if (req.params.action == 'changeName'){
         Shop.updateOne(
            {_id: req.params.shop_id },
-           {shop_name:req.body.shop_name},
+           {name:req.body.name},
             function(err,result){
                 if (err){
                 res.send(err);        
@@ -78,7 +78,7 @@ exports.update = function (req, res) {
     if (req.params.action == 'addAgent'){
         Shop.updateOne(
            {_id: req.params.shop_id },
-           { $addToSet: {shop_agents: [req.body.shop_agent]}},
+           { $addToSet: {agents: [req.body.agent]}},
             function(err,result){
                 if (err){
                 res.send(err);        
@@ -91,7 +91,7 @@ exports.update = function (req, res) {
     if (req.params.action == 'removeAgent'){
         Shop.updateOne(
            {_id: req.params.shop_id },
-           { $pullAll: {shop_agents: [req.body.shop_agent]}},
+           { $pullAll: {agents: [req.body.agent]}},
             function(err,result){
                 if (err){
                 res.send(err);        
@@ -105,7 +105,7 @@ exports.update = function (req, res) {
     if (req.params.action == 'addClient'){
         Shop.updateOne(
            {_id: req.params.shop_id },
-           { $addToSet: {shop_clients: [req.body.shop_client]}},
+           { $addToSet: {clients: [req.body.client]}},
             function(err,result){
                 if (err){
                 res.send(err);        
@@ -118,7 +118,7 @@ exports.update = function (req, res) {
     if (req.params.action == 'removeClient'){
         Shop.updateOne(
            {_id: req.params.shop_id },
-           { $pullAll: {shop_clients: [req.body.shop_client]}},
+           { $pullAll: {clients: [req.body.client]}},
             function(err,result){
                 if (err){
                 res.send(err);        
@@ -132,7 +132,7 @@ exports.update = function (req, res) {
     if (req.params.action == 'addTicket'){
         Shop.updateOne(
            {_id: req.params.shop_id },
-           { $addToSet: {shop_tickets: [req.body.shop_ticket]}},
+           { $addToSet: {tickets: [req.body.ticket]}},
             function(err,result){
                 if (err){
                 res.send(err);        
@@ -145,7 +145,7 @@ exports.update = function (req, res) {
     if (req.params.action == 'removeTicket'){
         Shop.updateOne(
            {_id: req.params.shop_id },
-           { $pullAll: {shop_tickets: [req.body.shop_ticket]}},
+           { $pullAll: {tickets: [req.body.ticket]}},
             function(err,result){
                 if (err){
                 res.send(err);        

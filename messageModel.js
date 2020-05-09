@@ -1,27 +1,33 @@
 var mongoose = require('mongoose');
 mongoose.set('useCreateIndex', true);
 // Setup schema
-var ticketSchema = mongoose.Schema({
+var messageSchema = mongoose.Schema({
     shop_id: {
-        type: String,
-        required: true,
-        unique: true
-    },
-    client_id: {
         type: String,
         required: true
     },
-    status: {
+    ticket_id: {
+        type: String,
+        required: true
+    },
+    creator_id: {
+        type: String,
+        required: true
+    },
+    creator_role: {
         type: String,
         required: true
     },
     creation_date: {
         type: Date,
         default: Date.now
+    },
+    content: {
+        type: String
     }
 });
-// Export Ticket model
-var ticket = module.exports = mongoose.model('ticket', ticketSchema);
+// Export Message model
+var message = module.exports = mongoose.model('message', messageSchema);
 module.exports.get = function (callback, limit) {
-    ticket.find(callback).limit(limit);
+    message.find(callback).limit(limit);
 }

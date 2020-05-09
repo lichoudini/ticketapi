@@ -2,20 +2,20 @@ var mongoose = require('mongoose');
 mongoose.set('useCreateIndex', true);
 // Setup schema
 var shopSchema = mongoose.Schema({
-    shop_name: {
+    name: {
         type: String,
         required: true,
         unique: true
     },
-    shop_agents: {
+    agents: {
         type: Array,
         default:[]
     },
-    shop_clients: {
+    clients: {
         type: Array,
         default:[]
     },
-    shop_tickets: {
+    tickets: {
         type: Array,
         default:[]
     }

@@ -23,9 +23,9 @@ exports.index = function (req, res) {
 // Handle create client actions
 exports.new = function (req, res) {
     let client = new Client();
-        client.client_shop_id = req.body.client_shop_id;
-        client.client_name = req.body.client_name;
-        client.client_password = req.body.client_password;
+        client.shop_id = req.body.shop_id;
+        client.name = req.body.name;
+        client.password = req.body.password;
         client.save(function (err) {
                 res.json({
                     message: 'New client created!',
@@ -54,7 +54,7 @@ exports.update = function (req, res) {
     if (req.params.action == 'changeName'){
         Client.updateOne(
            {_id: req.params.client_id },
-           {client_name:req.body.client_name},
+           {name:req.body.name},
             function(err,result){
                 if (err){
                 res.send(err);        
@@ -69,7 +69,7 @@ exports.update = function (req, res) {
     if (req.params.action == 'changePassword'){
         Client.updateOne(
            {_id: req.params.client_id },
-           {client_password:req.body.client_password},
+           {password:req.body.password},
             function(err,result){
                 if (err){
                 res.send(err);        

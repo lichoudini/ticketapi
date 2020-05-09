@@ -2,20 +2,20 @@ var mongoose = require('mongoose');
 mongoose.set('useCreateIndex', true);
 // Setup schema
 var agentSchema = mongoose.Schema({
-    agent_shop_id: {
+    shop_id: {
         type: String,
         required: true,
         unique: true
     },
-    agent_role: {
+    role: {
         type: String,
         required: true
     },
-    agent_name: {
+    name: {
         type: String,
         required: true
     },
-    agent_password: {
+    password: {
         type: String,
         required: true
     }

@@ -17,6 +17,7 @@ var shopController = require('./shopController');
 var agentController = require('./agentController');
 var clientController = require('./clientController');
 var ticketController = require('./ticketController');
+var messageController = require('./messageController');
 
 
 // Shop routes
@@ -62,6 +63,14 @@ router.route('/tickets/:ticket_id')
 router.route('/tickets/:ticket_id/:action')
     .patch(ticketController.update)
     .put(ticketController.update)
+
+// Ticket Routes
+router.route('/messages')
+    .get(messageController.index)
+    .post(messageController.new);
+router.route('/messages/:message_id')
+    .get(messageController.view)
+    .delete(messageController.delete)
 
 
 

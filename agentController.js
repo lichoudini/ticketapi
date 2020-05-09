@@ -23,10 +23,10 @@ exports.index = function (req, res) {
 // Handle create agent actions
 exports.new = function (req, res) {
     let agent = new Agent();
-        agent.agent_shop_id = req.body.agent_shop_id;
-        agent.agent_role = req.body.agent_role;
-        agent.agent_name = req.body.agent_name;
-        agent.agent_password = req.body.agent_password;
+        agent.shop_id = req.body.shop_id;
+        agent.role = req.body.role;
+        agent.name = req.body.name;
+        agent.password = req.body.password;
         agent.save(function (err) {
                 res.json({
                     message: 'New agent created!',
@@ -54,7 +54,7 @@ exports.update = function (req, res) {
     if (req.params.action == 'changeRole'){
         Agent.updateOne(
            {_id: req.params.agent_id },
-           {agent_name:req.body.agent_name},
+           {role:req.body.role},
             function(err,result){
                 if (err){
                 res.send(err);        
@@ -69,7 +69,7 @@ exports.update = function (req, res) {
     if (req.params.action == 'changeName'){
         Agent.updateOne(
            {_id: req.params.agent_id },
-           {agent_name:req.body.agent_name},
+           {name:req.body.name},
             function(err,result){
                 if (err){
                 res.send(err);        
@@ -84,7 +84,7 @@ exports.update = function (req, res) {
     if (req.params.action == 'changePassword'){
         Agent.updateOne(
            {_id: req.params.agent_id },
-           {agent_password:req.body.agent_password},
+           {password:req.body.password},
             function(err,result){
                 if (err){
                 res.send(err);        

@@ -1,10 +1,10 @@
-// Import ticket model
-Ticket = require('./ticketModel');
+// Import message model
+Message = require('./messageModel');
 
 
 // Handle index actions
 exports.index = function (req, res) {
-    Ticket.get(function (err, ticket) {
+    Message.get(function (err, message) {
         if (err) {
             res.json({
                 status: "error",
@@ -13,40 +13,43 @@ exports.index = function (req, res) {
         }
         res.json({
             status: "success",
-            message: "Tickets retrieved successfully",
-            data: ticket
+            message: "Message retrieved successfully",
+            data: message
         });
     });
 };
 
 
-// Handle create ticket actions
+// Handle create message actions
 exports.new = function (req, res) {
-    let ticket = new Ticket();
-        ticket.shop_id = req.body.shop_id;
-        ticket.client_id = req.body.client_id;
-        ticket.status = req.body.status;
-        ticket.save(function (err) {
+    let message = new Message();
+        message.shop_id = req.body.shop_id;
+        message.ticket_id = req.body.ticket_id;
+        message.creator_id = req.body.creator_id;
+        message.creator_role = req.body.creator_role;
+        message.content = req.body.content;
+        message.save(function (err) {
                 res.json({
-                    message: 'New ticket created!',
-                    data: ticket
+                    message: 'New message created!',
+                    data: message
                 });
             });
         };
 
-// Handle view ticket info
+// Handle view messageinfo
 exports.view = function (req, res) {
-    Ticket.findById(req.params.ticket_id, function (err, ticket) {
+    Message.findById(req.params.message_id, function (err, message) {
         if (err)
             res.send(err);
         res.json({
-            message: 'Ticket details loading..',
-            data: ticket
+            message: 'Message details loading..',
+            data: message
         });
     });
 };
 
-// Handle update ticket info
+/*
+// Handle update message info
 exports.update = function (req, res) {
 
 
@@ -54,7 +57,7 @@ exports.update = function (req, res) {
     if (req.params.action == 'changeStatus'){
         Ticket.updateOne(
            {_id: req.params.ticket_id },
-           {status:req.body.status},
+           {ticket_status:req.body.ticket_status},
             function(err,result){
                 if (err){
                 res.send(err);        
@@ -67,16 +70,16 @@ exports.update = function (req, res) {
     
 }
 
-
+*/
 exports.delete = function (req, res) {
-    Ticket.remove({
-        _id: req.params.ticket_id
-    }, function (err, ticket) {
+    Message.remove({
+        _id: req.params.message_id
+    }, function (err, message) {
         if (err)
             res.send(err);
 res.json({
             status: "success",
-            message: 'ticket deleted'
+            message: 'message deleted'
         });
     });
 };

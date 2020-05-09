@@ -2,16 +2,16 @@ var mongoose = require('mongoose');
 mongoose.set('useCreateIndex', true);
 // Setup schema
 var clientSchema = mongoose.Schema({
-    client_shop_id: {
+    shop_id: {
         type: String,
         required: true,
         unique: true
     },
-    client_name: {
+    name: {
         type: String,
         required: true
     },
-    client_password: {
+    password: {
         type: String,
         required: true
     }
